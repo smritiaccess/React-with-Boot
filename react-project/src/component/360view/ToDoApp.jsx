@@ -28,13 +28,13 @@ class LoginComponent extends Component
        }
       // this.userNameChange=this.userNameChange.bind(this);
       // this.passwordControl=this.passwordControl.bind(this);
-      this.userNamePassControl=this.userNamePassControl.bind(this);
+      this.handleChangeEvent=this.handleChangeEvent.bind(this);
     }
     render()
     {
         return(<div className="loginComponent">
-            UserName: <input type="text" name="username" value={this.state.username} onChange={this.userNamePassControl}/>
-            Password:<input type="text" name="password" value={this.state.password} onChange={this.userNamePassControl}/>
+            UserName: <input type="text" name="username" value={this.state.username} onChange={this.handleChangeEvent}/>
+            Password:<input type="text" name="password" value={this.state.password} onChange={this.handleChangeEvent}/>
            <button>Logme</button>
         </div>)
     }
@@ -58,12 +58,13 @@ class LoginComponent extends Component
         this.setState({password:event.target.value});
     }
 
-    userNamePassControl(event)
+    handleChangeEvent(event)
     {
-        console.log(event.taget.value);
+        console.log(event.target.name);
         this.setState({
-            [event.taget.name]:event.taget.value
-        });
+            [event.target.name]
+            :event.target.value
+        })
     }
 }
 export default ToDoApp;
