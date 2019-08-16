@@ -23,19 +23,26 @@ class LoginComponent extends Component
        super(props)
 
        this.state={ 
-           username:'Test',
-           password:''
+           username:'',
+           password:'',
+           hasLoginFailed:false,
+           showSuccess:false
        }
       // this.userNameChange=this.userNameChange.bind(this);
       // this.passwordControl=this.passwordControl.bind(this);
       this.handleChangeEvent=this.handleChangeEvent.bind(this);
+      this.loginClick=this.loginClick.bind(this);
     }
     render()
     {
         return(<div className="loginComponent">
+           {/* <ShowInvalidCredential hasLoginFailed={this.state.hasLoginFailed}/> */}
+           {this.state.hasLoginFailed && <div> Invalid Credentia</div>}
+          {/*  <ShowSuccessOnValid showSuccess={this.state.password}/> */}
+          {this.state.password && <div>Success!!!!!!!!!!!!!!!</div>}
             UserName: <input type="text" name="username" value={this.state.username} onChange={this.handleChangeEvent}/>
             Password:<input type="text" name="password" value={this.state.password} onChange={this.handleChangeEvent}/>
-           <button>Logme</button>
+           <button onClick={this.loginClick}>Logme</button>
         </div>)
     }
 
@@ -66,5 +73,54 @@ class LoginComponent extends Component
             :event.target.value
         })
     }
+
+    loginClick(event)
+    {
+        console.log(this.state);
+        if(this.state.username==="dummy" && this.state.password=="dummy")
+           
+           {
+            console.log("Sucessfull");
+               this.setState({
+                   hasLoginFailed:false,
+                   showSuccess:true
+               })
+           }
+           else
+           {
+               this.setState({
+                hasLoginFailed:true,
+                showSuccess:false
+               })
+               
+           }
+           //console.log("Failed");
+    }
+}
+
+class WelcomeComponent extends Component
+{
+    render()
+    {
+        return(<div>Welcome Component </div>)
+    }
+}
+
+function ShowSuccessOnValid(props)
+{
+    if(props.showSuccess)
+{ 
+    return <div>Success....</div>
+}
+return null;
+}
+function ShowInvalidCredential(props)
+{
+    console.log("Inside");
+    if(props.hasLoginFailed)
+    {
+        return <div>Invalid</div>
+    }
+    return null;
 }
 export default ToDoApp;
