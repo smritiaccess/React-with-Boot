@@ -1,20 +1,23 @@
 import React,{Component} from 'react';
 import "./ToDoApp.css";
+import {BrowserRouter as Router ,Route} from 'react-router-dom';
 class ToDoApp extends Component
 {
     render(){
-        return(<div className="todo">Todo Application!!!!!
-        <LoginComponent/>
+        return(<div className="todo">
+        <Router>
+            <>
+            <Route path="/" exact component={LoginComponent}/>
+            <Route path="/login" component={LoginComponent}/>
+            <Route path="/welcome" component={WelcomeComponent}/>
+            </>
+        </Router>
+        
         </div>)
     }
 }
 
-class TestComponent extends Component
-{
-   render(){
-       return(<div className="div1">Check</div>)
-   }
-}
+
 
 class LoginComponent extends Component
 {
@@ -102,7 +105,7 @@ class WelcomeComponent extends Component
 {
     render()
     {
-        return(<div>Welcome Component </div>)
+        return(<div>Welcome Component !!!!</div>)
     }
 }
 
